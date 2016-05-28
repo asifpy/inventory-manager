@@ -1,0 +1,8 @@
+logs
+/.idea
+node_modules
+start_backup.bat
+start_github.bat
+start_repo.bat
+push.bat
+backup.bat
