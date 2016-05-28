@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PRODUCTS } from './mock-products';
-import { Product } from './product';
+import { PRODUCTS } from '../data/mock-products';
+import { Product } from '../data/product';
 import { ProductDetailComponent } from './product-detail.component';
 
 @Component({

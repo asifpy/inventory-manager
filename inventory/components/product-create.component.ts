@@ -7,7 +7,7 @@ import {
   Validators,    
 } from '@angular/common';
 
-import { Product } from './product';
+import { Product } from '../data/product';
 
 @Component({
   selector: 'product-create',

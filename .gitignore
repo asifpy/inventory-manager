@@ -1,8 +1,7 @@
-logs
-/.idea
+typings
+inventory/**/*.js
+inventory/**/*.map
 node_modules
-start_backup.bat
-start_github.bat
-start_repo.bat
-push.bat
-backup.bat
+jspm_packages
+bower_components
+npm-debug.log

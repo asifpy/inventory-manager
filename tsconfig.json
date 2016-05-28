@@ -1,6 +1,7 @@
     {
       "compilerOptions": {
         "target": "es5",
+        //"out": "built/local/tsc.js",
         "module": "commonjs",
         "moduleResolution": "node",
         "sourceMap": true,
