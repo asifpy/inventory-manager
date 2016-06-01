@@ -14,17 +14,24 @@
                 (ngSubmit)="onSubmit(productForm.value)"  
                 class="form-horizontal">
 
-                {{productForm.id}}
+                <div *ngFor="let field of objToArray(productForm.controls); let i = index"
+                  class='form-group'
+                  [class.has_error]="!productForm.find(field).valid && productForm.find(field).touched"
+                >
+                  
+                  <label attr.for="{{field}}" class="col-sm-2 control-label">{{field|uppercase}}</label>
+                  <div class="col-xs-6">
+                      <input
+                        class="form-control"
+                        id="{{field}}Input"
+                        placeholder="Enter {{field|uppercase}}"
+                        [ngFormControl]="productForm.controls[field]">
+                  </div>
+                  {{getErrors(field)}}
 
+                  <!-- <div *ngIf="errorMessage !== null">{{errorMessage}}</div> -->
+                </div>
           </form>
-
-          <!-- <fieldset class={% if field.errors %} "form-group has-error" {% else %} "form-group" {% endif %} >
-            {{ field|label_with_class:"col-sm-2 control-label" }}
-            <div class="col-xs-4">
-              {{ field|input_with_class:"form-control" }}
-              {{ field.errors }}
-            </div>
-          </fieldset> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
