@@ -1,8 +1,8 @@
-<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" attr.data-target="#{{product.id}}">
+<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" attr.data-target="#{{pr.id}}">
   View More..
 </button>
 
-<div class="modal fade" id="{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="{{pr.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -15,14 +15,13 @@
           <tbody>
             <tr *ngFor="let prop of product_properties()">
                 <td><strong>{{prop|uppercase}}</strong></td>
-                <td>{{product[prop]}}</td>
+                <td>{{pr[prop]}}</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

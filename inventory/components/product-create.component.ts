@@ -9,35 +9,49 @@ import {
   Validators,    
 } from '@angular/common';
 
+import { ObjectKeysService } from '../services/object-keys.service';
 import { Product } from '../data/product';
-import { getValidatorErrorMessage } from '../validators/custom.validator';
+import {
+  getValidatorErrorMessage, 
+  idValidator
+} from '../validators/custom.validator';
 
 @Component({
   selector: 'product-create',
   templateUrl: 'inventory/templates/product-create.component.html',
+  providers: [ObjectKeysService]
 })
 
-export class ProductCreateComponent{
+export class ProductCreateComponent {
   
   //id: Control = new Control('', Validators.required)
   
-  productForm: ControlGroup
+  productForm: ControlGroup;
+  formFields: Array<string>;
+  
+  idChecks: any[] = [
+    Validators.required,
+    idValidator
+  ]
 
-	constructor(fb: FormBuilder) {
+  nameChecks: any[] = [
+    Validators.required,
+    Validators.maxLength(10)
+  ]
+
+  constructor(fb: FormBuilder, keysService: ObjectKeysService) {
     this.productForm = fb.group({
-		  'id':  ['', Validators.required],
-		  'name': ['', Validators.required],
-		  'price': ['', Validators.required],
-		  'stock': ['', Validators.required],
-		  'packings': ['', Validators.required]
-		});  
+    'id': ['', Validators.compose(this.idChecks)],
+    'name': ['', Validators.compose(this.nameChecks)],
+	  'price': ['', Validators.required],
+		'stock': ['', Validators.required],
+		'packings': ['', Validators.required]
+		});
+
+    this.formFields = keysService.keys(this.productForm.controls)  
 	}
 
-   objToArray(o){
-    return Object.keys(o);
-   } 
-
-   getErrors(field){
+  getErrors(field){
 
      let control = this.productForm.find(field)
      for (let propertyName in control.errors)

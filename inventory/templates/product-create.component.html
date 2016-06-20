@@ -14,7 +14,7 @@
                 (ngSubmit)="onSubmit(productForm.value)"  
                 class="form-horizontal">
 
-                <div *ngFor="let field of objToArray(productForm.controls); let i = index"
+                <div *ngFor="let field of formFields; let i = index"
                   class='form-group'
                   [class.has_error]="!productForm.find(field).valid && productForm.find(field).touched"
                 >
