@@ -5,7 +5,7 @@ import { ObjectKeysService } from '../services/object-keys.service';
 @Component({
   selector: 'product-details',
   templateUrl: 'inventory/templates/product-detail.component.html',
-  providers: [ObjectKeysService]
+  //providers: [ObjectKeysService]
 })
 
 export class ProductDetailComponent{

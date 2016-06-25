@@ -9,15 +9,9 @@ import { ProductDetailComponent } from './product-detail.component';
   directives: [ProductDetailComponent],
 })
 
-export class ProductListComponent implements OnInit{
+export class ProductListComponent {
 	public products: Product[];
-
-	getProducts(){
-		this.products = PRODUCTS;
+	constructor(){
+		this.products = PRODUCTS
 	}
-
-	ngOnInit() {
-		this.getProducts();
-	}
-
 }
