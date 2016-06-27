@@ -27,7 +27,7 @@
                         placeholder="Enter {{field|uppercase}}"
                         [ngFormControl]="productForm.controls[field]">
                   </div>
-                  <div *ngIf="formError() != null && errorField == field">{{formError()[field]}}</div>
+                  <div *ngIf="formError() != null && formError()[1] == field">{{formError()[0][field]}}</div>
                 </div>
           </form>
       </div>

@@ -9,8 +9,8 @@ import {
   Validators,    
 } from '@angular/common';
 
-import { ObjectKeysService } from '../services/object-keys.service';
 import { CheckFormErrors } from '..//services/form-errors.service';
+import { ObjectKeys } from '../shared/abstract';
 import { Product } from '../data/product';
 import {
   getValidatorErrorMessage, 
@@ -20,10 +20,10 @@ import {
 @Component({
   selector: 'product-create',
   templateUrl: 'inventory/templates/product-create.component.html',
-  providers: [CheckFormErrors, ObjectKeysService]
+  providers: [CheckFormErrors]
 })
 
-export class ProductCreateComponent {
+export class ProductCreateComponent extends ObjectKeys  {
   
   //id: Control = new Control('', Validators.required)
   
@@ -43,7 +43,8 @@ export class ProductCreateComponent {
     Validators.maxLength(10)
   ]
 
-  constructor(fb: FormBuilder, private keysService: ObjectKeysService, private formErrorsService: CheckFormErrors) {
+  constructor(fb: FormBuilder, private formErrorsService: CheckFormErrors) {
+    super();
     this.productForm = fb.group({
       'id': ['', Validators.compose(this.idChecks)],
       'name': ['', Validators.compose(this.nameChecks)],
@@ -52,18 +53,12 @@ export class ProductCreateComponent {
 		  'packings': ['', Validators.required]
 		});
 
-    this.formFields = keysService.keys(this.productForm.controls)
-    //console.log(this.formFields)
-    //this.formFields = formErrorsService.getFormFields(this.productForm)
-    //this.formError = this.formErrorsService.getErrors(this.productForm, this.formFields)
-    //console.log(this.formError)
+    this.formFields = this.keys(this.productForm.controls)
 
 	}
 
   formError(){
-    let error = this.formErrorsService.getErrors(this.productForm, this.formFields)
-    this.errorField = this.keysService.keys(error)[0]
-    return error
+    return this.formErrorsService.formError(this.productForm)
   }
 
 

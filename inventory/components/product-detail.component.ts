@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../data/product';
-import { ObjectKeysService } from '../services/object-keys.service';
+import { ObjectKeys } from '../shared/abstract';
 
 @Component({
   selector: 'product-details',
@@ -8,14 +8,11 @@ import { ObjectKeysService } from '../services/object-keys.service';
   //providers: [ObjectKeysService]
 })
 
-export class ProductDetailComponent{
+export class ProductDetailComponent extends ObjectKeys {
 	@Input()
 	pr: Product;
 	//n: number = 10;
 
-	constructor(private keysService: ObjectKeysService){}
-	//product_propertie = this.keysService.keys(this.n)
-
-	product_properties = () => { return this.keysService.keys(this.pr) }
+	product_properties = () => { return this.keys(this.pr) }
 	
 }

@@ -1,21 +1,24 @@
 import { Injectable, Inject } from '@angular/core';
 
-import { ObjectKeysService } from './object-keys.service';
+import { ObjectKeys } from '../shared/abstract';
 import { getValidatorErrorMessage } from '../validators/custom.validator';
 
 
 @Injectable()
-export class CheckFormErrors {
+export class CheckFormErrors extends ObjectKeys {
 
-	// constructor( @Inject(ObjectKeysService) private keysService: ObjectKeysService) { }
+	getFormFields(form){
+		return this.keys(form.controls)
+	}
 
-	// getFormFields(form){
-	// 	return this.keysService.keys(form.controls)
-	// }
+	formError(form) {
+		let error = this.getErrors(form)
+		let errorField = this.keys(error)[0]
+		return [error, errorField]
+	}
 
-	getErrors(form, formFields) {
-		//let formFields = this.getFormFields(form)
-		//let formFields = fields
+	getErrors(form) {
+		let formFields = this.getFormFields(form)
 
 		for (let field of formFields) {
 			let control = form.find(field)
@@ -28,7 +31,6 @@ export class CheckFormErrors {
 			}
 		}
 		return null
-
 	}
 
 }
