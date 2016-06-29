@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../data/product';
-import { ObjectKeys } from '../shared/abstract';
+import { ObjectKeys } from '../../shared/abstract';
 
 @Component({
-  selector: 'product-details',
-  templateUrl: 'inventory/templates/product-detail.component.html',
-  //providers: [ObjectKeysService]
+	selector: 'product-details',
+	moduleId: module.id,
+	templateUrl: 'product-detail.component.html',
+	//providers: [ObjectKeysService]
 })
 
 export class ProductDetailComponent extends ObjectKeys {
@@ -14,5 +15,5 @@ export class ProductDetailComponent extends ObjectKeys {
 	//n: number = 10;
 
 	product_properties = () => { return this.keys(this.pr) }
-	
+
 }

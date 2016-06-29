@@ -1,38 +1,39 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {  
+import {
   CORE_DIRECTIVES,
   FORM_DIRECTIVES,
   FormBuilder,
-  Control, 
+  Control,
   ControlGroup,
-  ControlArray,  
-  Validators,    
+  ControlArray,
+  Validators,
 } from '@angular/common';
 
-import { CheckFormErrors } from '..//services/form-errors.service';
-import { ObjectKeys } from '../shared/abstract';
+import { CheckFormErrors } from '../../services/form-errors.service';
+import { ObjectKeys } from '../../shared/abstract';
 import { Product } from '../data/product';
 import {
-  getValidatorErrorMessage, 
+  getValidatorErrorMessage,
   idValidator
-} from '../validators/custom.validator';
+} from '../../validators/custom.validator';
 
 @Component({
   selector: 'product-create',
-  templateUrl: 'inventory/templates/product-create.component.html',
+  moduleId: module.id,
+  templateUrl: 'product-create.component.html',
   providers: [CheckFormErrors]
 })
 
-export class ProductCreateComponent extends ObjectKeys  {
-  
+export class ProductCreateComponent extends ObjectKeys {
+
   //id: Control = new Control('', Validators.required)
-  
+
   productForm: ControlGroup;
   formFields: Array<string>;
   errorField: string;
 
   //formError: string;
-  
+
   idChecks: any[] = [
     Validators.required,
     idValidator
@@ -48,21 +49,21 @@ export class ProductCreateComponent extends ObjectKeys  {
     this.productForm = fb.group({
       'id': ['', Validators.compose(this.idChecks)],
       'name': ['', Validators.compose(this.nameChecks)],
-	    'price': ['', Validators.required],
-		  'stock': ['', Validators.required],
-		  'packings': ['', Validators.required]
-		});
+      'price': ['', Validators.required],
+      'stock': ['', Validators.required],
+      'packings': ['', Validators.required]
+    });
 
     this.formFields = this.keys(this.productForm.controls)
 
-	}
+  }
 
-  formError(){
+  formError() {
     return this.formErrorsService.formError(this.productForm)
   }
 
 
-  onSubmit(value: any): void {  
+  onSubmit(value: any): void {
     //console.log('you submitted value:', value.id); 
     console.log('you submitted value:', value)
   }
