@@ -16,12 +16,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var product_1 = require('../data/product');
 var abstract_1 = require('../../shared/abstract');
+//import { productValue } from '../shared/product-form';
 var ProductDetailComponent = (function (_super) {
     __extends(ProductDetailComponent, _super);
     function ProductDetailComponent() {
         var _this = this;
         _super.apply(this, arguments);
         //n: number = 10;
+        // ngOnInit() {
+        // 	console.log(productValue(this.pr, "name"))
+        // }
         this.product_properties = function () { return _this.keys(_this.pr); };
     }
     __decorate([

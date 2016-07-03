@@ -17,45 +17,45 @@ var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var form_errors_service_1 = require('../../services/form-errors.service');
 var abstract_1 = require('../../shared/abstract');
-var custom_validator_1 = require('../../validators/custom.validator');
+var product_1 = require('../data/product');
+var product_form_1 = require('../shared/product-form');
+var product_service_1 = require('../services/product.service');
 var ProductCreateComponent = (function (_super) {
     __extends(ProductCreateComponent, _super);
-    function ProductCreateComponent(fb, formErrorsService) {
+    function ProductCreateComponent(fb, formErrorsService, productService) {
         _super.call(this);
         this.formErrorsService = formErrorsService;
-        //formError: string;
-        this.idChecks = [
-            common_1.Validators.required,
-            custom_validator_1.idValidator
-        ];
-        this.nameChecks = [
-            common_1.Validators.required,
-            common_1.Validators.maxLength(10)
-        ];
-        this.productForm = fb.group({
-            'id': ['', common_1.Validators.compose(this.idChecks)],
-            'name': ['', common_1.Validators.compose(this.nameChecks)],
-            'price': ['', common_1.Validators.required],
-            'stock': ['', common_1.Validators.required],
-            'packings': ['', common_1.Validators.required]
-        });
+        this.productService = productService;
+        this.productForm = fb.group(product_form_1.productForm(null));
         this.formFields = this.keys(this.productForm.controls);
     }
     ProductCreateComponent.prototype.formError = function () {
         return this.formErrorsService.formError(this.productForm);
     };
-    ProductCreateComponent.prototype.onSubmit = function (value) {
-        //console.log('you submitted value:', value.id); 
-        console.log('you submitted value:', value);
+    ProductCreateComponent.prototype.saveProduct = function () {
+        console.log(this.productForm.value);
+        if (this.productForm.dirty && this.productForm.valid) {
+            var form = this.productForm.value;
+            var product = new product_1.Product({
+                id: form.id,
+                name: form.name,
+                price: form.price,
+                stock: form.stock,
+                packing: form.packing,
+                description: form.description
+            });
+            this.productService.addProduct(product);
+            alert("Name: " + this.productForm.value.id + " Email: " + this.productForm.value.name);
+        }
     };
     ProductCreateComponent = __decorate([
         core_1.Component({
             selector: 'product-create',
             moduleId: module.id,
             templateUrl: 'product-create.component.html',
-            providers: [form_errors_service_1.CheckFormErrors]
+            providers: [form_errors_service_1.CheckFormErrors, product_service_1.ProductService]
         }), 
-        __metadata('design:paramtypes', [common_1.FormBuilder, form_errors_service_1.CheckFormErrors])
+        __metadata('design:paramtypes', [common_1.FormBuilder, form_errors_service_1.CheckFormErrors, product_service_1.ProductService])
     ], ProductCreateComponent);
     return ProductCreateComponent;
 }(abstract_1.ObjectKeys));

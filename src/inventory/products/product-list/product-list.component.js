@@ -9,11 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var mock_products_1 = require('../data/mock-products');
 var product_detail_component_1 = require('../product-detail/product-detail.component');
+var product_service_1 = require('../services/product.service');
 var ProductListComponent = (function () {
-    function ProductListComponent() {
-        this.products = mock_products_1.PRODUCTS;
+    function ProductListComponent(productService) {
+        this.productService = productService;
+        this.products = this.productService.getAllProducts();
     }
     ProductListComponent = __decorate([
         core_1.Component({
@@ -21,8 +22,9 @@ var ProductListComponent = (function () {
             moduleId: module.id,
             templateUrl: 'product-list.component.html',
             directives: [product_detail_component_1.ProductDetailComponent],
+            providers: [product_service_1.ProductService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [product_service_1.ProductService])
     ], ProductListComponent);
     return ProductListComponent;
 }());

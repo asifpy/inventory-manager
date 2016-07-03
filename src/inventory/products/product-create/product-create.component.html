@@ -11,7 +11,7 @@
       <div class="modal-body">
 
           <form [ngFormModel]="productForm"  
-                (ngSubmit)="onSubmit(productForm.value)"  
+                (ngSubmit)="saveProduct()"  
                 class="form-horizontal">
 
                 <div *ngFor="let field of formFields; let i = index"
@@ -29,11 +29,12 @@
                   </div>
                   <div *ngIf="formError() != null && formError()[1] == field">{{formError()[0][field]}}</div>
                 </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
           </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+
       </div>
     </div>
   </div>
