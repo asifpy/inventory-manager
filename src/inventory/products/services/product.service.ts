@@ -15,6 +15,7 @@ export class ProductService {
 
   constructor() {
     //localStorage.setItem('INVENTORY', JSON.stringify(PRODUCTS));
+    //localStorage.clear()
     this.products = JSON.parse(localStorage.getItem('INVENTORY') || '[]')
   }
 
@@ -23,7 +24,6 @@ export class ProductService {
       product.id = ++this.lastId;
     }
     this.products.push(product);
-    console.log(this.products)
     localStorage.setItem('INVENTORY', JSON.stringify(this.products));
     return this;
   }

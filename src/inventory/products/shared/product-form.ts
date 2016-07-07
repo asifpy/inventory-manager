@@ -23,6 +23,6 @@ export function productForm(product) {
 		'stock': [getObjectValue(product, 'stock'), Validators.required],
 		'packing': [getObjectValue(product, 'packing'), Validators.required]
 	}
-
+	//console.log(form)
 	return form
 }

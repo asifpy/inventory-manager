@@ -14,6 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
 var form_errors_service_1 = require('../../services/form-errors.service');
 var abstract_1 = require('../../shared/abstract');
@@ -22,10 +23,11 @@ var product_form_1 = require('../shared/product-form');
 var product_service_1 = require('../services/product.service');
 var ProductCreateComponent = (function (_super) {
     __extends(ProductCreateComponent, _super);
-    function ProductCreateComponent(fb, formErrorsService, productService) {
+    function ProductCreateComponent(fb, formErrorsService, productService, router) {
         _super.call(this);
         this.formErrorsService = formErrorsService;
         this.productService = productService;
+        this.router = router;
         this.productForm = fb.group(product_form_1.productForm(null));
         this.formFields = this.keys(this.productForm.controls);
     }
@@ -33,7 +35,6 @@ var ProductCreateComponent = (function (_super) {
         return this.formErrorsService.formError(this.productForm);
     };
     ProductCreateComponent.prototype.saveProduct = function () {
-        console.log(this.productForm.value);
         if (this.productForm.dirty && this.productForm.valid) {
             var form = this.productForm.value;
             var product = new product_1.Product({
@@ -45,7 +46,7 @@ var ProductCreateComponent = (function (_super) {
                 description: form.description
             });
             this.productService.addProduct(product);
-            alert("Name: " + this.productForm.value.id + " Email: " + this.productForm.value.name);
+            this.router.navigate(['/']);
         }
     };
     ProductCreateComponent = __decorate([
@@ -55,7 +56,7 @@ var ProductCreateComponent = (function (_super) {
             templateUrl: 'product-create.component.html',
             providers: [form_errors_service_1.CheckFormErrors, product_service_1.ProductService]
         }), 
-        __metadata('design:paramtypes', [common_1.FormBuilder, form_errors_service_1.CheckFormErrors, product_service_1.ProductService])
+        __metadata('design:paramtypes', [common_1.FormBuilder, form_errors_service_1.CheckFormErrors, product_service_1.ProductService, router_1.Router])
     ], ProductCreateComponent);
     return ProductCreateComponent;
 }(abstract_1.ObjectKeys));

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var product_list_component_1 = require('./products/product-list/product-list.component');
 var product_create_component_1 = require('./products/product-create/product-create.component');
+var router_1 = require('@angular/router');
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'Product - Inventory Manager';
@@ -20,7 +21,10 @@ var AppComponent = (function () {
             selector: 'my-app',
             moduleId: module.id,
             templateUrl: 'app.component.html',
-            directives: [product_list_component_1.ProductListComponent, product_create_component_1.ProductCreateComponent],
+            directives: [
+                product_list_component_1.ProductListComponent,
+                product_create_component_1.ProductCreateComponent,
+                router_1.ROUTER_DIRECTIVES],
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

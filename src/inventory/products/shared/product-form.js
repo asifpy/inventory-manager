@@ -18,6 +18,7 @@ function productForm(product) {
         'stock': [common_2.getObjectValue(product, 'stock'), common_1.Validators.required],
         'packing': [common_2.getObjectValue(product, 'packing'), common_1.Validators.required]
     };
+    //console.log(form)
     return form;
 }
 exports.productForm = productForm;

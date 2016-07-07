@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   CORE_DIRECTIVES,
   FORM_DIRECTIVES,
@@ -35,7 +36,11 @@ export class ProductCreateComponent extends ObjectKeys {
   formFields: Array<string>;
   errorField: string;
 
-  constructor(fb: FormBuilder, private formErrorsService: CheckFormErrors, private productService: ProductService) {
+  constructor(
+    fb: FormBuilder,
+    private formErrorsService: CheckFormErrors,
+    private productService: ProductService,
+    private router: Router) {
     super();
     this.productForm = fb.group(productForm(null));
     this.formFields = this.keys(this.productForm.controls)
@@ -46,7 +51,6 @@ export class ProductCreateComponent extends ObjectKeys {
   }
 
   saveProduct() {
-    console.log(this.productForm.value)
     if (this.productForm.dirty && this.productForm.valid) {
       let form = this.productForm.value
       let product = new Product({
@@ -59,9 +63,9 @@ export class ProductCreateComponent extends ObjectKeys {
       });
 
       this.productService.addProduct(product)
+      this.router.navigate(['/']);
 
-
-      alert(`Name: ${this.productForm.value.id} Email: ${this.productForm.value.name}`);
+      //alert(`Name: ${this.productForm.value.id} Email: ${this.productForm.value.name}`);
     }
   }
 

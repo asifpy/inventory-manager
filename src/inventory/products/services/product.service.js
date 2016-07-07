@@ -17,6 +17,7 @@ var ProductService = (function () {
         // Placeholder for products
         this.products = [];
         //localStorage.setItem('INVENTORY', JSON.stringify(PRODUCTS));
+        //localStorage.clear()
         this.products = JSON.parse(localStorage.getItem('INVENTORY') || '[]');
     }
     ProductService.prototype.addProduct = function (product) {
@@ -24,7 +25,6 @@ var ProductService = (function () {
             product.id = ++this.lastId;
         }
         this.products.push(product);
-        console.log(this.products);
         localStorage.setItem('INVENTORY', JSON.stringify(this.products));
         return this;
     };

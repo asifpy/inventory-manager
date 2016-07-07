@@ -16,7 +16,9 @@
 			<td>{{product.price}}</td>
 			<td>{{product.stock}}</td>
 			<td>{{product.description}}</td>
-			<td><product-details [pr]="product"></product-details></td>
+			<td><product-details [pr]="product"></product-details>
+				<product-update [pr]="product"></product-update>
+			</td>
 		</tr>
 	</tbody>
 </table>

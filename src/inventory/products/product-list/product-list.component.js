@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var product_detail_component_1 = require('../product-detail/product-detail.component');
+var product_update_component_1 = require('../product-update/product-update.component');
 var product_service_1 = require('../services/product.service');
 var ProductListComponent = (function () {
     function ProductListComponent(productService) {
@@ -21,7 +22,7 @@ var ProductListComponent = (function () {
             selector: 'product-list',
             moduleId: module.id,
             templateUrl: 'product-list.component.html',
-            directives: [product_detail_component_1.ProductDetailComponent],
+            directives: [product_detail_component_1.ProductDetailComponent, product_update_component_1.ProductUpdateComponent],
             providers: [product_service_1.ProductService]
         }), 
         __metadata('design:paramtypes', [product_service_1.ProductService])
