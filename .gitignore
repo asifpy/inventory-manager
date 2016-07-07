@@ -1,3 +1,4 @@
+__pycache__/
 typings
 inventory/**/*.js
 inventory/**/*.map
