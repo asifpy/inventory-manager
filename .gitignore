@@ -1,7 +1,7 @@
 __pycache__/
 typings
-inventory/**/*.js
-inventory/**/*.map
+src/**/*.js
+src/**/*.map
 node_modules
 jspm_packages
 bower_components
