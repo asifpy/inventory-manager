@@ -28,34 +28,14 @@ product_list_fields = {
 }
 
 
-parser = reqparse.RequestParser()
-parser.add_argument('code')
-parser.add_argument('name')
-parser.add_argument('price')
-parser.add_argument('packing')
-parser.add_argument('description')
+class BaseProductResource(Resource):
+    def product(self, id):
+        return Product.objects.get(id=id)
 
-
-class ProductListResource(Resource):
-    @marshal_with(product_list_fields)
-    def get(self):
-        products = Product.objects.all()
-        # return jsonify(products)
-        return {'products': products}
-
-
-class ProductDetailResource(Resource):
-    @marshal_with(product_fields)
-    def get(self, id):
-        product = Product.objects.get(id=id)
-        return product
-
-
-class ProductCreateResource(Resource):
-    @marshal_with(product_fields)
-    def post(self):
-        args = parser.parse_args()
-        Product.objects.create(
+    @property
+    def field_values(self):
+        args = self.parser.parse_args()
+        return dict(
             code=args.code,
             name=args.name,
             price=args.price,
@@ -63,9 +43,49 @@ class ProductCreateResource(Resource):
             description=args.description
         )
 
+    @property
+    def parser(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('code')
+        parser.add_argument('name')
+        parser.add_argument('price')
+        parser.add_argument('packing')
+        parser.add_argument('description')
+        return parser
+
+
+class ProductListResource(BaseProductResource):
+    '''Gives a list of all products, and allows user to POST new product'''
+
+    @marshal_with(product_list_fields)
+    def get(self):
+        products = Product.objects.all()
+        # return jsonify(products)
+        return {'products': products}
+
+    @marshal_with(product_fields)
+    def post(self):
+        product = Product.objects.create(**self.field_values)
+        return product
+
+
+class ProductResource(BaseProductResource):
+    '''Gives a single product and allows user to
+    delete/update product instance
+    '''
+    @marshal_with(product_fields)
+    def get(self, id):
+        return self.product(id)
+
+    @marshal_with(product_fields)
+    def put(self, id):
+        return self.product(id).update(**self.field_values)
+
+    def delete(self, id):
+        self.product(id).delete()
+        return {'result': True}
+
 
 product_api.add_resource(ProductListResource, '/products')
-product_api.add_resource(ProductCreateResource, '/products/create')
-product_api.add_resource(ProductDetailResource, '/products/<id>')
-
+product_api.add_resource(ProductResource, '/products/<id>')
 
