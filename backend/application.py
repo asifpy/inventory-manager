@@ -15,13 +15,11 @@ def create_app(config_filename):
     db.init_app(app)
 
     # import blueprints
-    # from accounts.views import accounts_app
+    from product.resources import product_bp
 
     # register blueprints
-    # app.register_blueprint(accounts_app)
+    app.register_blueprint(product_bp)
     return app
 
-app = create_app('settings')
-
-if __name__ == '__main__':
-    app.run()
+# if __name__ == '__main__':
+#     app.run()
