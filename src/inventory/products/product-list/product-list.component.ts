@@ -14,8 +14,11 @@ import { ProductService } from '../services/product.service';
 })
 
 export class ProductListComponent {
-	public products: Product[];
+	public products: any;
 	constructor(private productService: ProductService) {
-		this.products = this.productService.getAllProducts()
+		this.productService.getAllProducts()
+			.subscribe(
+				response => this.products = response.products
+                );
 	}
 }

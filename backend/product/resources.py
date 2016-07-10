@@ -6,11 +6,13 @@ from flask_restful import(
     marshal_with,
     reqparse
 )
+from flask_restful.utils import cors
 
 from product.models import Product
 
 product_bp = Blueprint('product', __name__)
-product_api = Api(product_bp)
+product_api = Api(product_bp, decorators=[cors.crossdomain(origin='*')])
+
 
 product_fields = {
     'id': fields.String,
@@ -88,4 +90,3 @@ class ProductResource(BaseProductResource):
 
 product_api.add_resource(ProductListResource, '/products')
 product_api.add_resource(ProductResource, '/products/<id>')
-
