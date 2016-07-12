@@ -1,4 +1,5 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify, make_response, request
+import json
 from flask_restful import(
     Api,
     Resource,
@@ -31,6 +32,9 @@ product_list_fields = {
 
 
 class BaseProductResource(Resource):
+    def options(self):
+        pass
+
     def product(self, id):
         return Product.objects.get(id=id)
 
@@ -67,8 +71,8 @@ class ProductListResource(BaseProductResource):
 
     @marshal_with(product_fields)
     def post(self):
-        product = Product.objects.create(**self.field_values)
-        return product
+        Product.objects.create(**self.field_values)
+        return jsonify({'result': 'success'})
 
 
 class ProductResource(BaseProductResource):

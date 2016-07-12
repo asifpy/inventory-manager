@@ -1,6 +1,6 @@
+import 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-import 'rxjs/Rx';
 import { Observable }     from 'rxjs/Observable';
 
 import { Product } from '../data/product';
@@ -10,54 +10,52 @@ import { PRODUCTS } from '../data/mock-products';
 @Injectable()
 export class ProductService {
 
-  // Placeholder for last id so we can simulate
-  // automatic incrementing of id's
-  lastId: number = 0;
-
   // Placeholder for products
   products: Product[] = [];
+  product: Product;
 
   private productUrl = 'http://127.0.0.1:5000/products';  // URL to web api
 
-  constructor(private http: Http) {
-    //localStorage.setItem('INVENTORY', JSON.stringify(PRODUCTS));
-    //localStorage.clear()
-    this.products = JSON.parse(localStorage.getItem('INVENTORY') || '[]')
+  constructor(private http: Http) {}
+
+  addProduct(product: Product){
+    let headers = new Headers({'Content-Type': 'application/json'});
+
+    this.http.post(this.productUrl, JSON.stringify(product), {headers: headers})
+        .map(this.extractData)
+        .catch(this.handleError)
+        .subscribe();
+
+    return this
   }
 
-  addProduct(product: Product): ProductService {
-    if (!product.id) {
-      product.id = ++this.lastId;
-    }
-    this.products.push(product);
-    localStorage.setItem('INVENTORY', JSON.stringify(this.products));
-    return this;
-  }
+  updateProduct(product: Product, formData: Product){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let url = `${this.productUrl}/${product.id}`;
 
-  updateProductById(id: number, values: Object = {}): Product {
-    let todo = this.getProductById(id);
-    if (!todo) {
-      return null;
-    }
-    Object.assign(todo, values);
-    return todo;
+    this.http.put(url, JSON.stringify(formData), {headers:headers})
+        .map(this.extractData)
+        .catch(this.handleError)
+        .subscribe();
+
+    return this
   }
 
   getAllProducts(): Observable<any> {
     return this.http.get(this.productUrl)
-    .map(this.extractData)
-    .catch(this.handleError);
-    // .subscribe(halls => this.products = halls);
-    //return this.products;
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
-  getProductById(id: number): Product {
-    return this.products
-      .filter(product => product.id === id)
-      .pop();
+  getProductById(id: string): Observable<Product>{
+    let url = `${this.productUrl}/${id}`;
+
+    return this.http.get(url)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
-  deleteProductById(id: number): ProductService {
+  deleteProductById(id: string): ProductService {
     this.products = this.products
       .filter(product => product.id !== id);
     return this;
@@ -69,8 +67,6 @@ export class ProductService {
   }
 
   private handleError (error: any) {
-    // In a real world app, we might use a remote logging infrastructure
-    // We'd also dig deeper into the error to get a better message
     let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead

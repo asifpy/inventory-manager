@@ -58,24 +58,18 @@ export class ProductUpdateComponent extends ObjectKeys {
   saveProduct() {
     if (this.productForm.dirty && this.productForm.valid) {
       let form = this.productForm.value
-      let product = new Product({
-        id: form.id,
+      let formProduct = new Product({
+        code: form.code,
         name: form.name,
         price: form.price,
-        stock: form.stock,
+        //stock: form.stock,
         packing: form.packing,
         description: form.description
       });
 
-      this.productService.addProduct(product)
+      this.productService.updateProduct(this.pr, formProduct)
       this.router.navigate(['/']);
-
-      //alert(`Name: ${this.productForm.value.id} Email: ${this.productForm.value.name}`);
     }
   }
 
-  // onSubmit(value: any): void {
-  //   //console.log('you submitted value:', value.id); 
-  //   console.log('you submitted value:', value)
-  // }
 }

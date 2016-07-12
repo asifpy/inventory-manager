@@ -54,10 +54,10 @@ export class ProductCreateComponent extends ObjectKeys {
     if (this.productForm.dirty && this.productForm.valid) {
       let form = this.productForm.value
       let product = new Product({
-        id: form.id,
+        code: form.code,
         name: form.name,
         price: form.price,
-        stock: form.stock,
+        //stock: form.stock,
         packing: form.packing,
         description: form.description
       });

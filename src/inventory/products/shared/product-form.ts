@@ -17,11 +17,12 @@ export function productForm(product) {
 	]
 
 	let form = {
-		'id': [getObjectValue(product, 'id'), Validators.compose(idChecks)],
+		'code': [getObjectValue(product, 'code'), Validators.compose(idChecks)],
 		'name': [getObjectValue(product, 'name'), Validators.compose(nameChecks)],
 		'price': [getObjectValue(product, 'price'), Validators.required],
-		'stock': [getObjectValue(product, 'stock'), Validators.required],
-		'packing': [getObjectValue(product, 'packing'), Validators.required]
+		//'stock': [getObjectValue(product, 'stock'), Validators.required],
+		'packing': [getObjectValue(product, 'packing'), Validators.required],
+		'description': [getObjectValue(product, 'description'), Validators.required]
 	}
 	//console.log(form)
 	return form
