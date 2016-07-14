@@ -5,7 +5,7 @@ import { Product } from '../data/product';
 import { getObjectValue } from '../../shared/common';
 
 
-export function productForm(product) {
+export function productForm() {
 	let idChecks: any[] = [
 		Validators.required,
 		idValidator
@@ -17,12 +17,12 @@ export function productForm(product) {
 	]
 
 	let form = {
-		'code': [getObjectValue(product, 'code'), Validators.compose(idChecks)],
-		'name': [getObjectValue(product, 'name'), Validators.compose(nameChecks)],
-		'price': [getObjectValue(product, 'price'), Validators.required],
+		'code': ['', Validators.compose(idChecks)],
+		'name': ['', Validators.compose(nameChecks)],
+		'price': ['', Validators.required],
 		//'stock': [getObjectValue(product, 'stock'), Validators.required],
-		'packing': [getObjectValue(product, 'packing'), Validators.required],
-		'description': [getObjectValue(product, 'description'), Validators.required]
+		'packing': ['', Validators.required],
+		'description': ['', Validators.required]
 	}
 	//console.log(form)
 	return form

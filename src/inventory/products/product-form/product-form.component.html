@@ -1,0 +1,45 @@
+<button *ngIf="pr != null" type="button" class="btn btn-info btn-sm" data-toggle="modal" attr.data-target="#update_product_{{pr.id}}">
+<i class="glyphicon glyphicon-edit"></i> Update Product</button>
+
+
+<button *ngIf="pr == null" type="button" class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#create_product">
+<i class="glyphicon glyphicon-plus"></i> Create Product</button>
+
+<div class="modal fade" id="{{view}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Product Form</h4>
+      </div>
+      <div class="modal-body">
+
+          <form [ngFormModel]="productForm"  
+                (ngSubmit)="saveProduct()"  
+                class="form-horizontal">
+
+                <div *ngFor="let field of formFields; let i = index"
+                  class='form-group'
+                  [class.has_error]="!productForm.find(field).valid && productForm.find(field).touched"
+                >
+                  
+                  <label attr.for="{{field}}" class="col-sm-2 control-label">{{field|uppercase}}</label>
+                  <div class="col-xs-6">
+                      <input
+                        class="form-control"
+                        id="{{field}}Input"
+                        placeholder="Enter {{field|uppercase}}"
+                        [ngFormControl]="productForm.controls[field]">
+                  </div>
+                  <div *ngIf="formError() != null && formError()[1] == field">{{formError()[0][field]}}</div>
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>

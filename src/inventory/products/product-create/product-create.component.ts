@@ -19,58 +19,17 @@ import {
   idValidator
 } from '../../validators/custom.validator';
 import { ProductService } from '../services/product.service';
+import { ProductFormComponent } from '../product-form/product-form.component'
 
 
 @Component({
   selector: 'product-create',
   moduleId: module.id,
   templateUrl: 'product-create.component.html',
-  providers: [CheckFormErrors, ProductService]
+  providers: [CheckFormErrors, ProductService],
+  directives: [ProductFormComponent]
 })
 
-export class ProductCreateComponent extends ObjectKeys {
+export class ProductCreateComponent {
 
-  //id: Control = new Control('', Validators.required)
-
-  productForm: ControlGroup;
-  formFields: Array<string>;
-  errorField: string;
-
-  constructor(
-    fb: FormBuilder,
-    private formErrorsService: CheckFormErrors,
-    private productService: ProductService,
-    private router: Router) {
-    super();
-    this.productForm = fb.group(productForm(null));
-    this.formFields = this.keys(this.productForm.controls)
-  }
-
-  formError() {
-    return this.formErrorsService.formError(this.productForm)
-  }
-
-  saveProduct() {
-    if (this.productForm.dirty && this.productForm.valid) {
-      let form = this.productForm.value
-      let product = new Product({
-        code: form.code,
-        name: form.name,
-        price: form.price,
-        //stock: form.stock,
-        packing: form.packing,
-        description: form.description
-      });
-
-      this.productService.addProduct(product)
-      this.router.navigate(['/']);
-
-      //alert(`Name: ${this.productForm.value.id} Email: ${this.productForm.value.name}`);
-    }
-  }
-
-  // onSubmit(value: any): void {
-  //   //console.log('you submitted value:', value.id); 
-  //   console.log('you submitted value:', value)
-  // }
 }
