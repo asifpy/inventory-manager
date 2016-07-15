@@ -1,10 +1,9 @@
 import 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
-import { Product } from '../data/product';
-import { PRODUCTS } from '../data/mock-products';
+import { Product } from '../models/product';
 
 
 @Injectable()

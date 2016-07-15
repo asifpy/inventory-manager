@@ -12,8 +12,8 @@ import {
 
 import { CheckFormErrors } from '../../services/form-errors.service';
 import { ObjectKeys } from '../../shared/abstract';
-import { Product } from '../data/product';
-import { productForm } from '../shared/product-form';
+import { Product } from '../models/product';
+import { productForm } from './product-form';
 import {
   getValidatorErrorMessage,
   idValidator
@@ -88,6 +88,7 @@ export class ProductFormComponent extends ObjectKeys {
         this.productService.addProduct(formProduct)
       }
       this.router.navigate(['/']);
+      console.log("competed")
     }
   }
 
