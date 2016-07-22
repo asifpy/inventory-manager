@@ -36,5 +36,5 @@ Installation (Backend)
 - Run server: python backend/manage.py runserver
 ```
 
-Go to [http://localhost:8080](http://localhost:8080) in your browser.
+Go to [http://localhost:8080](http://localhost:3000) in your browser.
 
