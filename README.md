@@ -32,7 +32,7 @@ Installation (Backend)
 
 ```
 - Create your seperate virtual env and activate it
-- Install requirements: pip install -r requirements.txt
+- Install requirements: pip install -r backend/requirements.txt
 - Run server: python backend/manage.py runserver
 ```
 
