@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../models/product';
-import { ObjectKeys } from '../../shared/abstract';
+import { getObjectKeys } from '../../shared/common';
 
 @Component({
 	selector: 'product-details',
@@ -8,10 +8,10 @@ import { ObjectKeys } from '../../shared/abstract';
 	templateUrl: 'product-detail.component.html'
 })
 
-export class ProductDetailComponent extends ObjectKeys {
+export class ProductDetailComponent {
 	@Input()
 	pr: Product;
 
-	product_properties = () => { return this.keys(this.pr) }
+	product_properties = () => { return getObjectKeys(this.pr) }
 
 }

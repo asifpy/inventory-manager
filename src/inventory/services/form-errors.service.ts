@@ -1,19 +1,19 @@
 import { Injectable, Inject } from '@angular/core';
 
-import { ObjectKeys } from '../shared/abstract';
+import { getObjectKeys } from '../shared/common';
 import { getValidatorErrorMessage } from '../validators/custom.validator';
 
 
 @Injectable()
-export class CheckFormErrors extends ObjectKeys {
+export class CheckFormErrors {
 
 	getFormFields(form){
-		return this.keys(form.controls)
+		return getObjectKeys(form.controls)
 	}
 
 	formError(form) {
 		let error = this.getErrors(form)
-		let errorField = this.keys(error)[0]
+		let errorField = getObjectKeys(error)[0]
 		return [error, errorField]
 	}
 

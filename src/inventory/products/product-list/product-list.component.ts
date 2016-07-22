@@ -9,7 +9,6 @@ import { ProductService } from '../services/product.service';
 	moduleId: module.id,
 	templateUrl: 'product-list.component.html',
 	directives: [ProductDetailComponent, ProductUpdateComponent],
-	providers: [ProductService]
 })
 
 export class ProductListComponent {

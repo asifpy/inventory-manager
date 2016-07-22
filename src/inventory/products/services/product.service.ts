@@ -20,24 +20,24 @@ export class ProductService {
   addProduct(product: Product){
     let headers = new Headers({'Content-Type': 'application/json'});
 
-    this.http.post(this.productUrl, JSON.stringify(product), {headers: headers})
+    return this.http.post(this.productUrl, JSON.stringify(product), {headers: headers})
         .map(this.extractData)
         .catch(this.handleError)
-        .subscribe();
+        //.subscribe();
 
-    return this
+    //return this
   }
 
   updateProduct(product: Product, formData: Product){
     let headers = new Headers({'Content-Type': 'application/json'});
     let url = `${this.productUrl}/${product.id}`;
 
-    this.http.put(url, JSON.stringify(formData), {headers:headers})
+    return this.http.put(url, JSON.stringify(formData), {headers:headers})
         .map(this.extractData)
         .catch(this.handleError)
-        .subscribe();
+        //.subscribe();
 
-    return this
+    //return this
   }
 
   getAllProducts(): Observable<any> {

@@ -11,7 +11,7 @@ import {
 } from '@angular/common';
 
 import { CheckFormErrors } from '../../services/form-errors.service';
-import { ObjectKeys } from '../../shared/abstract';
+import { getObjectKeys } from '../../shared/common';
 import { Product } from '../models/product';
 import { productForm } from './product-form';
 import {
@@ -25,10 +25,10 @@ import { ProductService } from '../services/product.service';
   selector: 'product-form',
   moduleId: module.id,
   templateUrl: 'product-form.component.html',
-  providers: [CheckFormErrors, ProductService]
+  providers: [CheckFormErrors]
 })
 
-export class ProductFormComponent extends ObjectKeys {
+export class ProductFormComponent {
 
   productForm: ControlGroup;
   formFields: Array<string>;
@@ -42,10 +42,9 @@ export class ProductFormComponent extends ObjectKeys {
     private formErrorsService: CheckFormErrors,
     private productService: ProductService,
     private router: Router) {
-    super();
-
+ 
     this.productForm = this.fb.group(productForm());
-    this.formFields = this.keys(this.productForm.controls)
+    this.formFields = getObjectKeys(this.productForm.controls)
   }
 
   ngOnInit() {
@@ -53,7 +52,7 @@ export class ProductFormComponent extends ObjectKeys {
       this.view = "update_product_"+this.pr.id
       
       // update form controls with product properties in update view
-      for (let field of this.keys(this.pr)){
+      for (let field of getObjectKeys(this.pr)){
         let control = this.productForm.controls[field]
         if (control) {
             (<Control>control).updateValue(this.pr[field], true);
@@ -83,11 +82,15 @@ export class ProductFormComponent extends ObjectKeys {
 
       if(this.pr){
         this.productService.updateProduct(this.pr, formProduct)
+          .subscribe((data) => {
+            console.log('updated')
+            this.router.navigate(['/dashboard']);
+            });
       }
       else{
         this.productService.addProduct(formProduct)
       }
-      this.router.navigate(['/']);
+      //this.router.navigate(['/']);
       console.log("competed")
     }
   }
