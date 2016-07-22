@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable }     from 'rxjs/Observable';
 import {
   CORE_DIRECTIVES,
   FORM_DIRECTIVES,
@@ -32,6 +33,7 @@ export class ProductFormComponent {
 
   productForm: ControlGroup;
   formFields: Array<string>;
+  observable : Observable<any>
   view: string;
   
   @Input()
@@ -80,17 +82,16 @@ export class ProductFormComponent {
         description: form.description
       });
 
-      if(this.pr){
-        this.productService.updateProduct(this.pr, formProduct)
-          .subscribe((data) => {
-            console.log('updated')
-            this.router.navigate(['/dashboard']);
-            });
+      if(this.pr) {
+        this.observable = this.productService.updateProduct(this.pr, formProduct)
       }
-      else{
-        this.productService.addProduct(formProduct)
+      else {
+        this.observable = this.productService.addProduct(formProduct)
       }
-      //this.router.navigate(['/']);
+      
+      this.observable.subscribe((data) => {
+        this.router.navigate(['/dashboard']);
+      });
       console.log("competed")
     }
   }
