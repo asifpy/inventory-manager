@@ -1,3 +1,4 @@
+<product-create (productsChanged)="productsChanged($event)"></product-create>
 <table class="table table-bordered table-condensed">
 	<thead>
 		<tr>
@@ -17,7 +18,7 @@
 			<td>{{product.stock}}</td>
 			<td>{{product.description}}</td>
 			<td><product-details [pr]="product"></product-details>
-				<product-update [pr]="product"></product-update>
+				<product-update [pr]="product" (productsChanged)="productsChanged($event)">></product-update>
 			</td>
 		</tr>
 	</tbody>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable }     from 'rxjs/Observable';
 import {
@@ -38,6 +38,7 @@ export class ProductFormComponent {
   
   @Input()
   pr: Product;
+  @Output() updateProducts = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
@@ -90,7 +91,8 @@ export class ProductFormComponent {
       }
       
       this.observable.subscribe((data) => {
-        this.router.navigate(['/dashboard']);
+        // notify parent component
+        this.updateProducts.emit(null);
       });
       console.log("competed")
     }

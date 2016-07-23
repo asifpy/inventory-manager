@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { ProductFormComponent } from '../product-form/product-form.component'
 
 
@@ -10,5 +10,10 @@ import { ProductFormComponent } from '../product-form/product-form.component'
 })
 
 export class ProductCreateComponent {
+	@Output() productsChanged = new EventEmitter();
+
+	updateProducts(event) {
+  		this.productsChanged.emit(null)
+	}
 
 }
