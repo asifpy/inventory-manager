@@ -10,7 +10,7 @@ The application demonstrate the following:
 - Flask REST API to serve products
 - MongoDB integration with Flask
 
-![image] (https://cloud.githubusercontent.com/assets/6741984/17070133/fc8249e2-5062-11e6-9266-f481cbf68566.png)
+![image] (https://user-images.githubusercontent.com/6741984/28938695-83326a5a-7897-11e7-8620-05713ee6f03a.png)
 
 Quick Start
 -----------
