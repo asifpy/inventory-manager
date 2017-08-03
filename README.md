@@ -11,7 +11,7 @@ The application demonstrate the following:
 - MongoDB integration with Flask
 
 
-[alt tag](https://user-images.githubusercontent.com/6741984/28938695-83326a5a-7897-11e7-8620-05713ee6f03a.png)
+![alt tag](https://user-images.githubusercontent.com/6741984/28938695-83326a5a-7897-11e7-8620-05713ee6f03a.png)
 
 Quick Start
 -----------
